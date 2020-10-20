@@ -1,0 +1,61 @@
+[bar/top]
+width = 100%
+height = 25
+
+background = #00000000
+foreground = #ccffffff
+
+line-color = ${bar/bottom.background}
+line-size = 16
+
+spacing = 0
+padding-right = 5
+module-margin = 2
+
+modules-right = battery date
+
+font-0 = Monospace:size=11:7
+font-1 = FontAwesome5Free:style=Solid:size=11;7
+font-2 = FontAwesome5Free:style=Regular:size=11;7
+font-3 = FontAwesome5Brands:style=Regular:size=11;7
+
+[bar/bottom]
+bottom = true
+width = 100%
+height = 25
+
+background = ${bar/top.background}
+foreground = ${bar/top.foreground}
+
+modules-right = cpu
+
+font-0 = Monospace:size=11;7
+font-1 = FontAwesome5Free:style=Solid:size=12;-2
+font-2 = FontAwesome5Free:style=Regular:size=12;-2
+font-3 = FontAwesome5Brands:style=Regular:size=12;-2
+
+[module/date]
+type = internal/date
+date = %%{F#99}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M%%{F-}
+
+[module/battery]
+type = internal/battery
+
+full-at = 95
+
+battery = BAT1
+adapter = ACAD
+
+poll-interval = 0.5
+
+format-charging = <label-charging>
+format-discharging = <label-discharging>
+format-full = <label-full>
+
+[module/cpu]
+type = internal/cpu
+
+interval = 1
+
+format = <label>
+label = CPU %percentage%
