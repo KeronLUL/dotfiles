@@ -3,6 +3,6 @@
 # Terminate all instances od polybar
 killall -q polybar
 
-polybar top & polybar bottom
+polybar top 
 
 echo "Bars launched..."
