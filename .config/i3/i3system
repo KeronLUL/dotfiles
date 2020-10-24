@@ -1,8 +1,4 @@
 #!/bin/sh
-# /usr/bin/i3exit
-
-# with openrc use loginctl
-[ "$(cat /proc/1/comm)" = "systemd" ] && logind=systemctl
 
 case "$1" in
     lock)
@@ -12,20 +8,20 @@ case "$1" in
         i3-msg exit
         ;;
     suspend)
-        $HOME/.config/i3/blurlock && $logind suspend
+        $HOME/.config/i3/blurlock && systemctl suspend
         ;;
     hibernate)
-        $HOME/.config/i3/blurlock && $logind hibernate
+        $HOME/.config/i3/blurlock && systemctl hibernate
         ;;
     reboot)
-        $logind reboot
+        systemctl reboot
         ;;
     shutdown)
-        $logind poweroff
+        systemctl poweroff
         ;;
     *)
         echo "i3exit: missing or invalid argument!"
-        echo "Try again with: lock | logout | suspend | hibernate | reboot | shutdown"
+        echo "Available arguments: lock | logout | suspend | hibernate | reboot | shutdown"
         exit 2
 esac
 
