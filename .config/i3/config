@@ -81,6 +81,8 @@ bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl --min-value=600
 # Run polybar on start
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
+exec_always "setxkbmap -option 'grp:rctrl_rshift_toggle' -layout us,cz -variant ,qwerty"
+
 # Terminal
 bindsym $mod+Return exec alacritty
 
