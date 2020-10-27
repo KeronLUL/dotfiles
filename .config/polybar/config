@@ -5,6 +5,7 @@ height = 25
 
 background = #00ffffff
 
+padding-left = 1
 padding-right = 2
 module-margin = 1
 
@@ -15,6 +16,7 @@ font-2 = FontAwesome5Free:style=Regular:size=10;4
 font-3 = FontAwesome5Brands:style=Regular:size=10;4
 
 modules-left = i3
+modules-center = cpu memory
 modules-right = backlight pulseaudio battery date
 
 [module/i3]
@@ -65,7 +67,7 @@ format = <label-state> <label-mode>
 ; Default: %mode%
 label-mode = %mode%
 label-mode-padding = 2
-label-mode-background = #e60053
+label-mode-background = #ffffff
 
 ; Available tokens:
 ;   %name%
@@ -110,7 +112,7 @@ label-urgent-background = #bd2c40
 label-urgent-padding = 2
 
 ; Separator in between workspaces
-;label-separator = 
+label-separator = |
 label-separator-padding = 0
 label-separator-foreground = #ffb52a
 
@@ -180,8 +182,6 @@ bar-empty-foreground = #44
 [module/pulseaudio]
 type = internal/pulseaudio
 
-; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
-; If not, uses default sink
 sink = alsa_output.pci-0000_00_1f.3.analog-stereo
 
 ; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
@@ -211,15 +211,74 @@ format-volume = <ramp-volume> <label-volume>
 
 ; Available tokens:
 ;   %percentage% (default)
-;   %decibels% (unreleased)
-label-muted = 🔇 muted
+;   %decibels% (unrelddeased)
+label-muted =  muted
 label-muted-foreground = #666
 
 ; Only applies if <ramp-volume> is used
-ramp-volume-0 = 🔈
-ramp-volume-1 = 🔉
-ramp-volume-2 = 🔊
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
 
-; Right and Middle click (unreleased)
-click-right = pavucontrol &
-; click-middle = 
+[module/memory]
+type = internal/memory
+
+; Default: 1
+interval = 3
+
+; Available tags:
+;   <label> (default)
+;   <bar-used>
+;   <bar-free>
+;   <ramp-used>
+;   <ramp-free>
+;   <bar-swap-used>
+;   <bar-swap-free>
+;   <ramp-swap-used>
+;   <ramp-swap-free>
+format = <label> <bar-used>
+
+label = RAM %gb_used%/%gb_total%
+
+; Only applies if <bar-used> is used
+bar-used-indicator =
+bar-used-width = 10
+bar-used-foreground-0 = #55aa55
+bar-used-foreground-1 = #557755
+bar-used-foreground-2 = #f5a70a
+bar-used-foreground-3 = #ff5555
+bar-used-fill = ▐
+bar-used-empty = ▐
+bar-used-empty-foreground = #444444
+
+[module/cpu]
+type = internal/cpu
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 0.5
+
+; Available tags:
+;   <label> (default)
+;   <bar-load>
+;   <ramp-load>
+;   <ramp-coreload>
+format = <label> <ramp-coreload>
+
+; Available tokens:
+;   %percentage% (default) - total cpu load averaged over all cores
+;   %percentage-sum% - Cumulative load on all cores
+;   %percentage-cores% - load percentage for each core
+;   %percentage-core[1-9]% - load percentage for specific core
+label = CPU %percentage%%
+
+; Spacing between individual per-core ramps
+ramp-coreload-spacing = 1
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
